@@ -1,56 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>JS Reference VS Copy</title>
+    <meta charset="UTF-8">
+    <title>JS Reference VS Copy</title>
 </head>
+
 <body>
 
-  <script>
-    // start with strings, numbers and booleans
+    <script>
+        //Good to know! Calling another variable to create a new one makes a copy, but calling an array or object to create a new one makes a REFERENCE. There are lots of ways around this, for arrays, but I like Array.from() the best. For objects we're looking at Object.assign({}, firstObject, {newAttribute: value}). Also learned the poor-man's deep clone via JSON parse & stringify
 
-    // Let's say we have an array
-    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+        // start with strings, numbers and booleans
 
-    // and we want to make a copy of it.
+        //These variables match when the second is set
+        //but when the first variable is changed
+        //the second one isn't affected
 
-    // You might think we can just do something like this:
+        // let age = 100;
+        // let age2 = age;
 
-    // however what happens when we update that array?
+        // console.log(age, age2);
 
-    // now here is the problem!
+        // age = 200;
 
-    // oh no - we have edited the original array too!
+        // console.log(age, age2);
 
-    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+        // let name = "Carolyn";
+        // let name2 = name;
 
-    // So, how do we fix this? We take a copy instead!
+        // console.log(name, name2)
 
-    // one way
+        // name = "Paul";
 
-    // or create a new array and concat the old one in
+        // console.log(name, name2)
 
-    // or use the new ES6 Spread
+        // Let's say we have an array
+        // const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
-    // now when we update it, the original one isn't changed
+        // and we want to make a copy of it.
+        // const team = players;
 
-    // The same thing goes for objects, let's say we have a person object
+        // console.log(players, team);
 
-    // with Objects
-    const person = {
-      name: 'Wes Bos',
-      age: 80
-    };
+        // You might think we can just do something like this:
 
-    // and think we make a copy:
+        // team[3] = "Lux";
+        // console.log(players, team);
 
-    // how do we take a copy instead?
+        // however what happens when we update that array?
 
-    // We will hopefully soon see the object ...spread
+        // now here is the problem!
 
-    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+        // oh no - we have edited the original array too!
 
-  </script>
+        // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+        // So, how do we fix this? We take a copy instead!
+
+        // one way
+
+        // const team2 = players.slice();
+        // if you pass slice nothing, you get a copy of the whole array
+
+        // or create a new array and concat the old one in
+
+        // const team2 = [].concat(players);
+
+        // or use the new ES6 Spread
+
+        // const team = [...players];
+
+        // const team5 = Array.from(players);
+
+        // now when we update it, the original one isn't changed
+
+        // The same thing goes for objects, let's say we have a person object
+
+        // with Objects
+        const person = {
+            name: 'Wes Bos',
+            age: 80
+        };
+
+        // and think we make a copy:
+
+        const cap2 = Object.assign({}, person, {
+            number: 99
+        });
+
+
+        // how do we take a copy instead?
+
+        // We will hopefully soon see the object ...spread
+
+        // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+        //POOR MAN'S DEEP CLONE
+
+        const dev2 = JSON.parse(JSON.stringify(wes));
+    </script>
 
 </body>
+
 </html>

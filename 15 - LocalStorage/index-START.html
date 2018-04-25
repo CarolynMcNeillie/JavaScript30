@@ -25,12 +25,20 @@
             <input type="text" name="item" placeholder="Item Name" required>
             <input type="submit" value="+ Add Item">
         </form>
+
+        <form class="manipulate-items">
+            <input type="submit" value="Clear All" data-function="clear">
+            <input type="submit" value="Check All" data-function="checkAll">
+            <input type="submit" value="Clear Checked" data-function="clearChecked">
+        </form>
+
     </div>
 
     <script>
         const addItems = document.querySelector('.add-items');
         const itemsList = document.querySelector('.plates');
         const items = JSON.parse(localStorage.getItem('items')) || [];
+        const manipulate = document.querySelector('manipulate-items');
 
         function addItem(e) {
             e.preventDefault();

@@ -49,36 +49,53 @@
     <script>
         const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
-        const splitBands = bands.map(x => x.split(' '));
+        //THE BOS WAY   
 
-        const shiftedArticles = [];
+        function strip(bandName) {
+            return bandName.replace(/^(a |the |an )/i, '').trim();
+        }
 
-        for (let i = 0; i < splitBands.length; i++) {
+        const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
 
-            if (splitBands[i][0] === "The" ||
-                splitBands[i][0] === "An" ||
-                splitBands[i][0] === "A"
-            ) {
-                splitBands[i].push(splitBands[i].shift())
-            }
-            shiftedArticles.push(splitBands[i])
-        };
+        document.querySelector('#bands').innerHTML =
+            sortedBands
+            .map(band => `<li>${band}</li>`)
+            .join('');
 
-        const sortedBandsSplit = shiftedArticles.sort()
+        console.log(sortedBands)
 
-        const finalArray = [];
 
-        for (let i = 0; i < sortedBandsSplit.length; i++) {
-            let last = sortedBandsSplit[i][(sortedBandsSplit[i].length) - 1]
+        // //CAROLYN'S SOLUTION
+        // const splitBands = bands.map(x => x.split(' '));
 
-            if (last === "The" || last === "An" || last === "A") {
-                sortedBandsSplit[i].unshift(sortedBandsSplit[i].pop());
-            }
+        // const shiftedArticles = [];
 
-            finalArray.push(sortedBandsSplit[i].join(" "));
-        };
+        // for (let i = 0; i < splitBands.length; i++) {
 
-        console.log(finalArray);
+        //     if (splitBands[i][0] === "The" ||
+        //         splitBands[i][0] === "An" ||
+        //         splitBands[i][0] === "A"
+        //     ) {
+        //         splitBands[i].push(splitBands[i].shift())
+        //     }
+        //     shiftedArticles.push(splitBands[i])
+        // };
+
+        // const sortedBandsSplit = shiftedArticles.sort()
+
+        // const finalArray = [];
+
+        // for (let i = 0; i < sortedBandsSplit.length; i++) {
+        //     let last = sortedBandsSplit[i][(sortedBandsSplit[i].length) - 1]
+
+        //     if (last === "The" || last === "An" || last === "A") {
+        //         sortedBandsSplit[i].unshift(sortedBandsSplit[i].pop());
+        //     }
+
+        //     finalArray.push(sortedBandsSplit[i].join(" "));
+        // };
+
+        // console.log(finalArray);
     </script>
 
 </body>
